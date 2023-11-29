@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Listar Perguntas</title>
+
+    <script>
+      function buscarCandidatos(pcpf) {
+        let xmlhttp = new XMLHttpRequest();
+        console.log("1");
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            let objReturnJSON = JSON.parse(this.responseText);
+            document.getElementById("nome").value = objReturnJSON.nome;
+            document.getElementById("cpf").value = objReturnJSON.cpf;
+            document.getElementById("sala").value = objReturnJSON.sala;
+            document.getElementById("mdForm").style.display = "block";
+          } else if (this.readyState < 4) {
+            console.log("3: " + this.readyState);
+          } else console.log("Requisicao falhou: " + this.status);
+        };
+        console.log("4");
+        xmlhttp.open("GET", "Listar_Candidado.php?cpf=" + pcpf);
+        xmlhttp.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        xmlhttp.send();
+      }
+      function ListarCandidatos() {
+        let xmlhttp = new XMLHttpRequest();
+        console.log("1");
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log("Chegou a resposta OK: " + this.responseText);
+            console.log("2");
+            let objReturnJSON = JSON.parse(this.responseText);
+            console.log("Resposta: " + this.responseText);
+            for ($i = 0; $i < objReturnJSON.length; $i++) {
+              let $linha = objReturnJSON[$i];
+              CriarLinhaTabela(objReturnJSON[$i]);
+            }
+          } else if (this.readyState < 4) {
+            console.log("3: " + this.readyState);
+          } else console.log("Requisicao falhou: " + this.status);
+        };
+        console.log("4");
+        xmlhttp.open("POST", "Listar_Candidado.php");
+        xmlhttp.setRequestHeader(
+          "Content-type",
+          "application/x-www-form-urlencoded"
+        );
+        xmlhttp.send();
+        console.log("enviei request get");
+        console.log("5");
+        CriarCabecalhoTabela();
+      }
+
+      function CriarCabecalhoTabela() {
+        let table = document.getElementById("tabela");
+
+        let tr = document.createElement("tr");
+
+        let th1 = document.createElement("th");
+        th1.textContent = "Nome";
+        tr.appendChild(th1);
+
+        let th2 = document.createElement("th");
+        th2.textContent = "Cpf";
+        tr.appendChild(th2);
+
+        let th3 = document.createElement("th");
+        th3.textContent = "Identidade";
+        tr.appendChild(th3);
+
+        let th4 = document.createElement("th");
+        th4.textContent = "Email";
+        tr.appendChild(th4);
+
+        let th5 = document.createElement("th");
+        th5.textContent = "Cargo";
+        tr.appendChild(th5);
+
+        let th6 = document.createElement("th");
+        th6.textContent = "Sala";
+        tr.appendChild(th6);
+
+        let th7 = document.createElement("th");
+        th7.textContent = "a";
+        tr.appendChild(th7);
+
+        table.appendChild(tr);
+      }
+      function CriarLinhaTabela(pobjReturnJSON) {
+        let table = document.getElementById("tabela");
+        let tr = document.createElement("tr");
+        table.appendChild(tr);
+
+        let td = document.createElement("td");
+        let textNode = document.createTextNode(pobjReturnJSON.nome);
+        td.appendChild(textNode);
+        tr.appendChild(td);
+
+        let td2 = document.createElement("td");
+        textnode = document.createTextNode(pobjReturnJSON.cpf);
+        td2.appendChild(textnode);
+        tr.appendChild(td2);
+
+        let td3 = document.createElement("td");
+        textnode = document.createTextNode(pobjReturnJSON.identidade);
+        td3.appendChild(textnode);
+        tr.appendChild(td3);
+
+        let td4 = document.createElement("td");
+        textnode = document.createTextNode(pobjReturnJSON.email);
+        td4.appendChild(textnode);
+        tr.appendChild(td4);
+
+        let td5 = document.createElement("td");
+        textnode = document.createTextNode(pobjReturnJSON.cargo);
+        td5.appendChild(textnode);
+        tr.appendChild(td5);
+
+        let td6 = document.createElement("td");
+        textnode = document.createTextNode(pobjReturnJSON.sala);
+        td6.appendChild(textnode);
+        tr.appendChild(td6);
+
+        let td7 = document.createElement("td");
+        let tagP = document.createElement("span", "onclick");
+        let textnode1 = "buscarCandidatos('" + pobjReturnJSON.cpf + "')";
+        tagP.setAttribute("onclick", textnode1);
+        textnode = document.createTextNode(textnode1);
+        tagP.appendChild(textnode);
+        td7.appendChild(tagP);
+        tr.appendChild(td7);
+
+        let tr_fim = document.getElementById("ultimalinha");
+
+        let msg = "";
+
+        return msg;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Inserir Pergunta</h1>
+    <br />
+
+    <button onclick="ListarCandidatos()">Listar Todos os Candidados</button>
+    <br /><br />
+    <a href="Principal.html">Voltar a tela Principal</a>
+    <br />
+    <table id="tabela">
+      <tr id="ultimaLinha">
+        <td colspan="4"></td>
+      </tr>
+    </table>
+    <p id="msg"></p>
+    <br />
+  </body>
+</html>

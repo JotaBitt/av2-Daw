@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu concurso público</title>
+
+    <script src="script.js"></script>
+</head>
+<body>
+    <h2>Bem-vindo ao site concurso público</h2>
+    <h3>Selecione uma opção abaixo</h3>
+
+    <nav>
+        <button onclick="document.getElementById('tab').style.display = 'none', document.getElementById('alterar').style.display='none',
+        document.getElementById('inserir').style.display='none', document.getElementById('fiscal').style.display='block'
+        ">Inserir Fiscal</button>
+
+        <button onclick="DeletarTabela(), document.getElementById('inserir').style.display='none', 
+        document.getElementById('alterar').style.display='none', document.getElementById('fiscal').style.display='none',
+        ListarFiscais()">Listar Fiscais</button>
+
+        <button onclick="DeletarTabela(), document.getElementById('inserir').style.display='none', 
+        document.getElementById('alterar').style.display='none', document.getElementById('fiscal').style.display='none',
+        ListarCandidatos()">Listar Candidatos</button>
+    </nav>
+
+    <section>
+
+    
+        <form action="" method="POST" id="alterar" style="display: none;">
+
+            <h1>Alterar Sala</h1>
+
+            Nome <input type="text" name="nome" id="nome_A">
+            <br>
+            CPF <input type="text" name="cpf" id="cpf_A">
+            <br>
+            Identidade <input type="text" name="identidade" id="identidade_A">
+            <br>
+            E-mail <input type="text" name="email" id="email_A">
+            <br>
+            Cargo <input type="text" name="cargo" id="cargo_A">
+            <br>
+            Sala de Prova <input type="text" name="sala" id="sala_A">
+            <br><br>
+
+            <input type="button" value="Alterar" onclick="AlterarSala()">
+        </form>
+
+        <form action="" method="POST" id="fiscal" style="display: none;">
+
+            <h1>Inserir Fiscal</h1>
+
+            Nome <input type="text" name="nome" id="nome_fisc">
+            <br>
+            CPF <input type="text" name="cpf" id="cpf_fisc">
+            <br>
+            Sala de Prova <input type="text" name="sala" id="sala_fisc">
+            <br><br>
+
+            <input type="button" value="Inserir" onclick="InserirFiscal(), DeletarFormFiscal(),
+            document.getElementById('fiscal').style.display='none'">
+        </form>
+
+        <table id="tab" style="display: none;"></table>
+    </section>
+    
+</body>
+</html>
