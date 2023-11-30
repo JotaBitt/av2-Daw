@@ -7,7 +7,7 @@
     $servidor = "localhost";
     $username = "root";
     $senha = "";
-    $database = "pessoal";
+    $database = "jotadb";
 
     $conn = new mysqli($servidor,$username,$senha,$database);
 
@@ -16,7 +16,7 @@
         die("Conexao falhou, avise o administrador do sistema");
     }
 
-    $comandoSQL = "INSERT INTO `fiscal` (nome,cpf,sala) values ('$nome', '$cpf', $sala)";
+    $comandoSQL = "INSERT INTO `fiscal de sala` (nome,cpf,sala) values ('$nome', '$cpf', $sala)";
     
     $resultado = $conn->query($comandoSQL);
 

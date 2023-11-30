@@ -16,8 +16,8 @@ function ListarCandidatos(){
         CriarCabecalhoCand();
 
         for (let i = 0; i < objReturnJSON.length; i++) {
-        let linha = objReturnJSON[i];
-        CriarLinhaTabelaCand(linha);
+            let linha = objReturnJSON[i];
+            CriarLinhaTabelaCand(linha);
         }
     } 
     else if(this.readyState < 4){
@@ -383,7 +383,7 @@ function InserirFiscal(){
     }
     console.log("4");
 
-    xmlhttp.open("POST", "http://localhost/3DAW/av2/adicionarFiscal.php");
+    xmlhttp.open("POST", "http://localhost/3DAW/av2/incluirFiscal.php");
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("nome=" + nome + "&cpf=" + cpf + "&sala=" + sala);
 

@@ -10,7 +10,7 @@
        die("Conexao falhou, avise o administrador do sistema");
     }
 
-    $comandoSQL = "SELECT * from `fiscal`";
+    $comandoSQL = "SELECT * from `fiscal de sala`";
     $resultado = $conn->query($comandoSQL);
 
     $perguntas[] = array();
